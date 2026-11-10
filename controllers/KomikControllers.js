@@ -37,3 +37,21 @@ async function createKomik(req, res) {
   }
 }
 
+async function updateKomik(req, res) {
+  const { id } = req.params;
+  try {
+    const komik = await db.Komik.findByPk(id);
+    if (!komik) {
+      return res.status(404).json({ error: 'Komik not found' });
+    }
+    await komik.update(req.body);
+    res.status(200).json(komik);
+  } catch (err) {
+    console.error('Error updating komik:', err.message);
+    if (err.name === 'SequelizeValidationError') {
+      return res.status(400).json({ error: err.message });
+    }
+    res.status(500).json({ error: 'Failed to update komik' });
+  }
+}
+
