@@ -1,30 +1,31 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+'use strict';
 
-const Komik = sequelize.define(
-  'Komik',
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
+module.exports = (sequelize, DataTypes) => {
+  const Komik = sequelize.define(
+    'Komik',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: DataTypes.TEXT,
+      },
+      author: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
-    },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    tableName: 'komik',
-    timestamps: false,
-  }
-);
+    {
+      tableName: 'komik',
+      timestamps: false,
+    }
+  );
 
-module.exports = Komik;
+  return Komik;
+};

@@ -1,4 +1,7 @@
+console.log('path models:', require.resolve('../models'));
 const db = require('../models');
+
+console.log('isi db:', Object.keys(db));
 
 async function connectDatabase() {
     try {
